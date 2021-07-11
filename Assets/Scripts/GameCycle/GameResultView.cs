@@ -8,8 +8,14 @@ public class GameResultView : MonoBehaviour
     [SerializeField] private ScoreHandler scoreHandler;
     [SerializeField] private GameCycle gameCycle;
     [SerializeField] private GameObject resultPanel;
-    [SerializeField] private Text resultPhrase;
     [SerializeField] private Button continueButton;
+
+    [Header("Score Counter")]
+    [SerializeField] private ScoreView scoreView;
+    [SerializeField] private float showingDuration;
+
+    [Header("Result Phrase")]
+    [SerializeField] private Text resultPhrase;
 
     [Header("UIMoves")]
     [SerializeField] private UIMoveSequence showSequence;
@@ -48,11 +54,13 @@ public class GameResultView : MonoBehaviour
     private void OnShowed()
     {
         continueButton.gameObject.SetActive(true);
+        scoreView.ShowCustomScore(true, showingDuration);
     }
 
     private void OnHidden()
     {
         resultPanel.SetActive(false);
         continueButton.gameObject.SetActive(false);
+        scoreView.ShowCustomScore(false, 0, 0, 0);
     }
 }

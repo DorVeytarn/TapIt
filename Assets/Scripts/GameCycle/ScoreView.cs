@@ -1,16 +1,12 @@
-﻿using System;
+﻿using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class ScoreView : MonoBehaviour
 {
     [SerializeField] private ScoreHandler scoreHandler;
-    [SerializeField] private Slider scoreBar;
-    [SerializeField] private Text scoreCounter;
-    [SerializeField] private float[] scoreGradations;
-
-    private int gradationIndex;
-    private Vector2 scoreRange;
+    [SerializeField] private Text counter;
+    [SerializeField] private bool automaticScoreUpdtate;
 
     private void OnEnable()
     {
@@ -20,41 +16,28 @@ public class ScoreView : MonoBehaviour
     private void OnDisable()
     {
         scoreHandler.ScoreChanged -= OnScoreChanged;
+        UpdateScore(0);
     }
 
-    private void Start()
+    public void ShowCustomScore(bool animatedShow = true, float duration = 0.5f,  float from = 0, float to = -1)
     {
-        SetNextGradationIndex();
-        UpdateScoreBar();
+        if(to == -1)
+            to = scoreHandler.CurrentScore;
+
+        if (animatedShow)
+            DOVirtual.Float(from, to, duration, UpdateScore);
+        else
+            UpdateScore(to);
     }
 
     private void OnScoreChanged(float value)
     {
-        bool isSuitableRange = value >= scoreRange.x && value <= scoreRange.y;
-
-        if (isSuitableRange == false)
-        {
-            SetNextGradationIndex();
-            UpdateScoreBar();
-        }
-
-        scoreCounter.text = ((int)value).ToString();
-        scoreBar.value = value;
+        if (automaticScoreUpdtate)
+            UpdateScore(value);
     }
 
-    private void SetNextGradationIndex()
+    private void UpdateScore(float value)
     {
-        float startValue = (gradationIndex >= scoreGradations.Length - 1) ? scoreRange.y : scoreGradations[gradationIndex];
-        float finishValue = (gradationIndex >= scoreGradations.Length - 1) ? startValue * startValue : scoreGradations[gradationIndex + 1];
-
-        scoreRange = new Vector2(startValue, finishValue);
-
-        gradationIndex++;
-    }
-
-    private void UpdateScoreBar()
-    {
-        scoreBar.minValue = scoreRange.x;
-        scoreBar.maxValue = scoreRange.y;
+        counter.text = ((int)value).ToString();
     }
 }

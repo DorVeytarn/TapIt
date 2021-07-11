@@ -47,7 +47,7 @@ public class StateTimerHandler : MonoBehaviour
 
     private void EmptyImage()
     {
-        var tween = DOTweenModuleUI.DOFillAmount(image, 0f, eventLauncher.SecondToOneBit - fillImageTime);
+        var tween = DOTweenModuleUI.DOFillAmount(image, 0f, eventLauncher.SecondToOneBit);
         tween.OnComplete(() =>
         {
             if (buttonState.IsTrueState && isTrueClicked == false)

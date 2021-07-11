@@ -19,6 +19,7 @@ public class ScoreHandler : MonoBehaviour
     private Coroutine oneTimeScoreAccrualing;
 
     public float CurrentScore => currentScore;
+
     public event Action<float> ScoreChanged;
 
     private void OnEnable()
@@ -37,6 +38,9 @@ public class ScoreHandler : MonoBehaviour
 
     private void OnGameStarted()
     {
+        currentScore = 0;
+        ScoreChanged?.Invoke(currentScore);
+
         if (permanentScoreAccrualing != null)
         {
             StopCoroutine(permanentScoreAccrualing);

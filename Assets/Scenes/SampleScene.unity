@@ -675,6 +675,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 370233664}
+  - component: {fileID: 370233666}
   - component: {fileID: 370233665}
   m_Layer: 5
   m_Name: ScorePanel
@@ -718,28 +719,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scoreHandler: {fileID: 345780547}
   scoreBar: {fileID: 180194802}
-  scoreCounter: {fileID: 367462634}
   scoreGradations:
   - 0
-  - 20
   - 50
   - 100
   - 150
   - 300
   - 600
-  - 900
-  - 1000
-  - 100000
-  - 1000000
-  - 1000000
-  - 1000000
-  - 1000000
-  - 1000000
-  - 1000000
-  - 1000000
-  - 1000000
-  - 1000000
-  - 1000000
+  - 1200
+  - 2400
+  - 5000
+  - 10000
+--- !u!114 &370233666
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 370233663}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d864417cf2f6f6841b069ab7b4f9d1af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scoreHandler: {fileID: 345780547}
+  counter: {fileID: 367462634}
+  automaticScoreUpdtate: 1
 --- !u!1 &389476322
 GameObject:
   m_ObjectHideFlags: 0
@@ -1296,8 +1301,10 @@ MonoBehaviour:
   scoreHandler: {fileID: 345780547}
   gameCycle: {fileID: 1589386936}
   resultPanel: {fileID: 326028697}
-  resultPhrase: {fileID: 753074296}
   continueButton: {fileID: 198655027}
+  scoreView: {fileID: 757226200}
+  showingDuration: 1
+  resultPhrase: {fileID: 753074296}
   showSequence: {fileID: 953414512}
   hideSequence: {fileID: 1007602547}
 --- !u!1 &740806858
@@ -1513,6 +1520,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 757226197}
+  - component: {fileID: 757226200}
   - component: {fileID: 757226199}
   - component: {fileID: 757226198}
   m_Layer: 5
@@ -1573,7 +1581,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 999
+  m_Text: 0
 --- !u!222 &757226199
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1582,6 +1590,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 757226196}
   m_CullTransparentMesh: 0
+--- !u!114 &757226200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 757226196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d864417cf2f6f6841b069ab7b4f9d1af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scoreHandler: {fileID: 345780547}
+  counter: {fileID: 757226198}
+  automaticScoreUpdtate: 0
 --- !u!1 &824508892
 GameObject:
   m_ObjectHideFlags: 0
