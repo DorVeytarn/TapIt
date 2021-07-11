@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class SoundBpmEventLauncher : MonoBehaviour
 {
-    private const int baseFrameCount = 60;
+    private const int seconds = 60;
 
     [SerializeField] private float delayBeforeEvent;
     [SerializeField] private AudioPlayer audioPlayer;
@@ -13,6 +13,7 @@ public class SoundBpmEventLauncher : MonoBehaviour
     private int currentBpm;
     private Coroutine bittingCoroutine;
     private Coroutine evaluatingBitCoroutine;
+    private AnimationCurve bittingCurve;
 
     public float SecondToOneBit { get; private set; }
 
@@ -28,7 +29,7 @@ public class SoundBpmEventLauncher : MonoBehaviour
             evaluatingBitCoroutine = StartCoroutine(EvaluatingBitCurve(bpm, curve));
         }
         else
-            SecondToOneBit = baseFrameCount / bpm;
+            SecondToOneBit = bpm / seconds;
 
         if (bittingCoroutine != null)
             StopCoroutine(bittingCoroutine);
@@ -52,7 +53,7 @@ public class SoundBpmEventLauncher : MonoBehaviour
         {
             BitPlayed?.Invoke();
             audioPlayer.Play();
-            yield return new WaitForSeconds(SecondToOneBit + delayBeforeEvent);
+            yield return new WaitForSeconds(SecondToOneBit);
         }
     }
 
@@ -63,7 +64,7 @@ public class SoundBpmEventLauncher : MonoBehaviour
 
         while (true)
         {
-            SecondToOneBit = baseFrameCount / (bpm * curve.Evaluate(time));
+            SecondToOneBit = (bpm / seconds) * curve.Evaluate(time);
 
             yield return null;
 

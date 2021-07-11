@@ -295,7 +295,7 @@ RectTransform:
   - {fileID: 1589709995}
   - {fileID: 753074295}
   m_Father: {fileID: 326028698}
-  m_RootOrder: 1
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -334,7 +334,7 @@ RectTransform:
   m_Children:
   - {fileID: 911133972}
   m_Father: {fileID: 326028698}
-  m_RootOrder: 2
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -526,11 +526,13 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 1007602546}
+  - {fileID: 953414511}
   - {fileID: 389476323}
   - {fileID: 197371467}
   - {fileID: 198655026}
   m_Father: {fileID: 713298674}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -768,7 +770,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 326028698}
-  m_RootOrder: 0
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -1270,8 +1272,6 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 953414511}
-  - {fileID: 1007602546}
   - {fileID: 326028698}
   m_Father: {fileID: 1438935914}
   m_RootOrder: 4
@@ -1347,8 +1347,7 @@ MonoBehaviour:
   buttonState: {fileID: 2128987198}
   clickHandler: {fileID: 1411133468}
   image: {fileID: 1305194592}
-  fillImageTime: 0.5
-  additionalDelayBeforeTimeOut: 0.1
+  fillImageTime: 0.1
 --- !u!1 &753074294
 GameObject:
   m_ObjectHideFlags: 0
@@ -1912,12 +1911,12 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 953414510}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 713298674}
-  m_RootOrder: 0
+  m_Father: {fileID: 326028698}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1941,7 +1940,7 @@ MonoBehaviour:
   - rectTransform: {fileID: 756352229}
     from: {x: 1.14e-13, y: 1480}
     to: {x: 1.14e-13, y: 658}
-    duration: 0.3
+    duration: 0.2
     delay: 0
     curve:
       serializedVersion: 2
@@ -1970,7 +1969,7 @@ MonoBehaviour:
   - rectTransform: {fileID: 1003014446}
     from: {x: -1396, y: 365}
     to: {x: 0, y: 365}
-    duration: 0.3
+    duration: 0.2
     delay: 0
     curve:
       serializedVersion: 2
@@ -1999,7 +1998,7 @@ MonoBehaviour:
   - rectTransform: {fileID: 757226197}
     from: {x: 1136, y: 148.521}
     to: {x: 0, y: 148.521}
-    duration: 0.3
+    duration: 0.2
     delay: 0
     curve:
       serializedVersion: 2
@@ -2028,7 +2027,7 @@ MonoBehaviour:
   - rectTransform: {fileID: 1589709995}
     from: {x: 0, y: -1322}
     to: {x: 0, y: -175}
-    duration: 0.3
+    duration: 0.2
     delay: 0
     curve:
       serializedVersion: 2
@@ -2156,12 +2155,12 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1007602545}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 713298674}
-  m_RootOrder: 1
+  m_Father: {fileID: 326028698}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2185,7 +2184,7 @@ MonoBehaviour:
   - rectTransform: {fileID: 756352229}
     from: {x: 1.14e-13, y: 658}
     to: {x: 1.14e-13, y: 1480}
-    duration: 0.3
+    duration: 0.2
     delay: 0
     curve:
       serializedVersion: 2
@@ -2214,7 +2213,7 @@ MonoBehaviour:
   - rectTransform: {fileID: 1003014446}
     from: {x: 0, y: 365}
     to: {x: -1396, y: 365}
-    duration: 0.3
+    duration: 0.2
     delay: 0
     curve:
       serializedVersion: 2
@@ -2243,7 +2242,7 @@ MonoBehaviour:
   - rectTransform: {fileID: 757226197}
     from: {x: 0, y: 148.521}
     to: {x: 1136, y: 148.521}
-    duration: 0.3
+    duration: 0.2
     delay: 0
     curve:
       serializedVersion: 2
@@ -2270,9 +2269,9 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 0
   - rectTransform: {fileID: 1589709995}
-    from: {x: 0, y: -1322}
-    to: {x: 0, y: -175}
-    duration: 0.3
+    from: {x: 0, y: -175}
+    to: {x: 0, y: -1322}
+    duration: 0.2
     delay: 0
     curve:
       serializedVersion: 2

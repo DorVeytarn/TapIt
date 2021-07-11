@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DG.Tweening;
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,13 +11,8 @@ public class StateTimerHandler : MonoBehaviour
     [SerializeField] private ClickHandler clickHandler;
     [SerializeField] private Image image;
     [SerializeField] private float fillImageTime = 0.5f;
-    [SerializeField] private float additionalDelayBeforeTimeOut = 0.1f;
 
-    private float barStep;
-    private float frames;
     private bool isTrueClicked;
-    private Coroutine imageEmptyCoroutine;
-    private Coroutine imageFillCoroutine;
 
     public event Action TimeOut;
 
@@ -36,19 +32,12 @@ public class StateTimerHandler : MonoBehaviour
 
     private void OnBitPlayed()
     {
-        isTrueClicked = false;
-
-        StopTargetCoroutine(imageEmptyCoroutine);
-
-        imageEmptyCoroutine = StartCoroutine(EmptyImage());
+        EmptyImage();
     }
 
     private void OnFalseClicked()
     {
-        StopTargetCoroutine(imageFillCoroutine);
-        StopTargetCoroutine(imageEmptyCoroutine);
-
-        imageFillCoroutine = StartCoroutine(FillImage(fillImageTime));
+        FillImage(fillImageTime);
     }
 
     private void OnTrueClicked()
@@ -56,51 +45,22 @@ public class StateTimerHandler : MonoBehaviour
         isTrueClicked = true;
     }
 
-    private IEnumerator EmptyImage()
+    private void EmptyImage()
     {
-        image.fillAmount = 1;
-
-        frames = 60 * eventLauncher.SecondToOneBit;
-        barStep = 1 / frames;
-
-        while (image.fillAmount > 0)
+        var tween = DOTweenModuleUI.DOFillAmount(image, 0f, eventLauncher.SecondToOneBit - fillImageTime);
+        tween.OnComplete(() =>
         {
-            yield return null;
-            image.fillAmount -= barStep;
-        }
+            if (buttonState.IsTrueState && isTrueClicked == false)
+                TimeOut?.Invoke();
+            else
+                isTrueClicked = false;
 
-        image.fillAmount = 0;
-        Debug.Log("image.fillAmount = 0");
-        yield return new WaitForSeconds(additionalDelayBeforeTimeOut);
-        Debug.Log("additionalDelayBeforeTimeOut");
-        if (isTrueClicked == false && buttonState.IsTrueState)
-        {
-            TimeOut?.Invoke();
-            StartCoroutine(FillImage(fillImageTime));
-        }
+            image.fillAmount = 1;
+        });
     }
 
-    private IEnumerator FillImage(float time)
+    private void FillImage(float time)
     {
-        Debug.Log("FillImage");
-        var frames = 60 * time;
-        var barStep = 1 / frames;
-
-        while (image.fillAmount < 1)
-        {
-            yield return null;
-            image.fillAmount += barStep;
-        }
-
-        image.fillAmount = 1;
-    }
-
-    private void StopTargetCoroutine(Coroutine coroutine)
-    {
-        if (coroutine != null)
-        {
-            StopCoroutine(coroutine);
-            coroutine = null;
-        }
+        DOTweenModuleUI.DOFillAmount(image, 1f, time);
     }
 }
