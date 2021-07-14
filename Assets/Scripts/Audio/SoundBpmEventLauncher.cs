@@ -29,7 +29,7 @@ public class SoundBpmEventLauncher : MonoBehaviour
             evaluatingBitCoroutine = StartCoroutine(EvaluatingBitCurve(bpm, curve));
         }
         else
-            SecondToOneBit = bpm / seconds;
+            SecondToOneBit = 1f / (bpm / seconds);
 
         if (bittingCoroutine != null)
             StopCoroutine(bittingCoroutine);
@@ -53,18 +53,19 @@ public class SoundBpmEventLauncher : MonoBehaviour
         {
             BitPlayed?.Invoke();
             audioPlayer.Play();
+            //Debug.Log(SecondToOneBit);
             yield return new WaitForSeconds(SecondToOneBit);
         }
     }
 
     private IEnumerator EvaluatingBitCurve(float bpm, AnimationCurve curve)
     {
-        curve.preWrapMode = WrapMode.Loop;
+        curve.postWrapMode = WrapMode.Loop;
         float time = 0;
 
         while (true)
         {
-            SecondToOneBit = (bpm / seconds) * curve.Evaluate(time);
+            SecondToOneBit = 1f / (bpm * curve.Evaluate(time) / seconds);
 
             yield return null;
 

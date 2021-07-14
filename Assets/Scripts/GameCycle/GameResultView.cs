@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class GameResultView : MonoBehaviour
 {
     [SerializeField] private ScoreHandler scoreHandler;
+    [SerializeField] private ScoreRecorder scoreRecorder;
     [SerializeField] private GameCycle gameCycle;
     [SerializeField] private GameObject resultPanel;
     [SerializeField] private Button continueButton;
@@ -13,6 +14,7 @@ public class GameResultView : MonoBehaviour
     [Header("Score Counter")]
     [SerializeField] private ScoreView scoreView;
     [SerializeField] private float showingDuration;
+    [SerializeField] private GameObject highScoreObject;
 
     [Header("Result Phrase")]
     [SerializeField] private Text resultPhrase;
@@ -21,20 +23,30 @@ public class GameResultView : MonoBehaviour
     [SerializeField] private UIMoveSequence showSequence;
     [SerializeField] private UIMoveSequence hideSequence;
 
+    private bool isNewHighScore;
+
     private void OnEnable()
     {
         continueButton.onClick.AddListener(OnContinueButtonClick);
+        scoreRecorder.HighScoreChanged += OnHighScoreChanged;
         gameCycle.GameIsLost += OnGameIsLost;
     }
 
     private void OnDisable()
     {
         continueButton.onClick.RemoveListener(OnContinueButtonClick);
+        scoreRecorder.HighScoreChanged -= OnHighScoreChanged;
         gameCycle.GameIsLost -= OnGameIsLost;
+    }
+    private void OnHighScoreChanged(float value)
+    {
+        isNewHighScore = true;
     }
 
     private void OnContinueButtonClick()
     {
+        highScoreObject.SetActive(false);
+
         if (hideSequence != null)
             hideSequence.Move(OnHidden);
         else
@@ -55,6 +67,12 @@ public class GameResultView : MonoBehaviour
     {
         continueButton.gameObject.SetActive(true);
         scoreView.ShowCustomScore(true, showingDuration);
+
+        if (isNewHighScore)
+        {
+            isNewHighScore = false;
+            highScoreObject.SetActive(true);
+        }
     }
 
     private void OnHidden()

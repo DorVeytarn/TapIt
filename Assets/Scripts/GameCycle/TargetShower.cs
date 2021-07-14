@@ -28,6 +28,9 @@ public class TargetShower : MonoBehaviour
     [SerializeField] private Image timerImageBar;
     [SerializeField] private Text timerCounter;
 
+    [Header("Main Button")]
+    [SerializeField] private UIMove mainButtonMove;
+
     private Coroutine delayedShoweCallback;
 
     private void OnEnable()
@@ -43,6 +46,7 @@ public class TargetShower : MonoBehaviour
     public void ShowTarget(Action callback)
     {
         SetDependentObjectsActive(true);
+        mainButtonMove.Move();
 
         if (currentState == ButtonState.Color)
             ShowColorTarget();
@@ -59,6 +63,7 @@ public class TargetShower : MonoBehaviour
     public void HideTarget()
     {
         SetDependentObjectsActive(false);
+        mainButtonMove.Move(false);
     }
 
     private void ShowColorTarget()
@@ -66,7 +71,6 @@ public class TargetShower : MonoBehaviour
         Color falseColor = palette.Colors[UnityEngine.Random.Range(0, palette.Colors.Count)];
 
         targetImage.color = falseColor;
-        //Debug.Log($"Targer False Color: {falseColor}");
         buttonStateSetter.SetColorState(palette.Colors, falseColor);
     }
 
@@ -90,7 +94,6 @@ public class TargetShower : MonoBehaviour
         while (seconds > 0)
         {
             var imageTween = DOTweenModuleUI.DOFillAmount(timerImageBar, 0, 1f).OnComplete(() => timerImageBar.fillAmount = 1);
-            //StartCoroutine(EmptyImage(1f, timerImageBar));
 
             yield return new WaitForSeconds(1f);
             seconds--;
@@ -101,21 +104,6 @@ public class TargetShower : MonoBehaviour
         timerCounter.gameObject.SetActive(false);
 
         callback?.Invoke();
-    }
-
-    private IEnumerator EmptyImage(float time, Image image)
-    {
-        image.fillAmount = 1;
-
-        var barStep = 1 / (60 * time);
-
-        while (image.fillAmount > 0)
-        {
-            image.fillAmount -= barStep;
-            yield return null;
-        }
-
-        image.fillAmount = 0;
     }
 
     private void SetDependentObjectsActive(bool active)

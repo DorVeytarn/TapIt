@@ -4,16 +4,17 @@ using UnityEngine.UI;
 
 public class ScoreView : MonoBehaviour
 {
+    [Header("Base Score")]
     [SerializeField] private ScoreHandler scoreHandler;
     [SerializeField] private Text counter;
-    [SerializeField] private bool automaticScoreUpdtate;
+    [SerializeField] protected bool automaticScoreUpdtate;
 
-    private void OnEnable()
+    protected virtual void OnEnable()
     {
         scoreHandler.ScoreChanged += OnScoreChanged;
     }
 
-    private void OnDisable()
+    protected virtual void OnDisable()
     {
         scoreHandler.ScoreChanged -= OnScoreChanged;
         UpdateScore(0);
@@ -29,15 +30,14 @@ public class ScoreView : MonoBehaviour
         else
             UpdateScore(to);
     }
+    protected void UpdateScore(float value)
+    {
+        counter.text = ((int)value).ToString();
+    }
 
     private void OnScoreChanged(float value)
     {
         if (automaticScoreUpdtate)
             UpdateScore(value);
-    }
-
-    private void UpdateScore(float value)
-    {
-        counter.text = ((int)value).ToString();
     }
 }
